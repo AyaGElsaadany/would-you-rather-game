@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import {Route,BrowserRouter as Router} from 'react-router-dom'
+import {connect} from 'react-redux'
+import Home from './components/Home'
+import newQuestion from './components/newQuestion'
+import leaderBoard from './components/leaderBoard'
+import Login from './components/Login'
+import { Component } from 'react';
+import Question from './components/question';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render(){
+    return (
+      <div>
+        { 
+          this.props.currentUserId ? 
+            <Router>
+              <Route exact path='/' component={Home}/> 
+              <Route path='/new' component={newQuestion}/> 
+              <Route path='/leaderBoard' component={leaderBoard}/> 
+              <Route path='/question/:id' component={Question}/>
+            </Router>: <Login />
+        }
+        
+      </div>
+    );
+  }
 }
 
-export default App;
+export default connect((state) => ({
+  currentUserId : state.login  //userId
+}))(App);
