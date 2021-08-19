@@ -36,6 +36,7 @@ class Question extends Component {
         if(questions[id] === undefined) {
             return (
                 <div>
+                    <Header/>
                     <h1>404</h1>
                     <p>The page not found</p>
                 </div>
@@ -59,8 +60,10 @@ class Question extends Component {
                                 <Badge pill bg="light" text="dark">voted</Badge>
                             )}
                             <ProgressBar now={(voteop1/totalVotes)*100} label={`${(voteop1/totalVotes)*100}%`} />
-                            <p>{questions[id].optionOne.votes.length} of {questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length}</p>
-                            
+                            <Card.Text>
+                                {questions[id].optionOne.votes.length} of {questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length}
+                            </Card.Text>
+
                             <Card.Text>
                                 {questions[id].optionTwo.text}
                             </Card.Text>
@@ -68,7 +71,9 @@ class Question extends Component {
                                 <Badge pill bg="light" text="dark">voted</Badge>
                             )}
                             <ProgressBar now={(voteop2/totalVotes)*100} label={`${(voteop2/totalVotes)*100}%`} />
-                            <p>{questions[id].optionTwo.votes.length} of {questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length}</p>
+                            <Card.Text>
+                                {questions[id].optionTwo.votes.length} of {questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length}
+                            </Card.Text>
                             
                             <Card.Text>
                                 Your answer : {users[currentUserId].answers[id]}
@@ -85,7 +90,7 @@ class Question extends Component {
                         <Card.Img variant="top" src={`./${questions[id].author}.jpg`} alt={`${questions[id].author}`} />
                         <Card.Body>
                             <Card.Title>{questions[id].author} asks would you rather :</Card.Title>
-                            <Card.Text>
+                            
                                 <Form onSubmit={this.handleSumbit}>
                                     <Form.Group className="mb-3" controlId="formBasicRadio">
                                         <Form.Check type="radio" 
@@ -102,7 +107,6 @@ class Question extends Component {
                                         Submit
                                     </Button>
                                 </Form>
-                            </Card.Text>
                             
                         </Card.Body>
                     </Card>
