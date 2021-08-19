@@ -11,7 +11,7 @@ class UnansweredQuestions extends Component {
             <div>
                 <h1>Unanswered</h1>
                 <ListGroup>
-                {ques.map((q) => (
+                {ques.sort((a,b)=>(b.timestamp - a.timestamp)).map((q) => (
                     <ListGroup.Item key={q.id}>
                         <img src={`${q.author}.jpg`} alt={`${q.author}`}/>
                         <div>{q.author} asks would you rather : </div>

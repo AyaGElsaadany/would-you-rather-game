@@ -16,7 +16,7 @@ class App extends Component {
           this.props.currentUserId ? 
             <Router>
               <Route exact path='/' component={Home}/> 
-              <Route path='/new' component={newQuestion}/> 
+              <Route path='/add' component={newQuestion}/> 
               <Route path='/leaderBoard' component={leaderBoard}/> 
               <Route path='/question/:id' component={Question}/>
             </Router>: <Login />

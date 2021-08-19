@@ -23,7 +23,6 @@ class Question extends Component {
     }
 
     render() {
-        
         const {questions, currentUserId, users, id} = this.props
 
         let voteop1 = '', voteop2 = '' ,totalVotes =''
@@ -32,6 +31,15 @@ class Question extends Component {
             voteop1 = questions[id].optionOne.votes.length 
             voteop2 = questions[id].optionTwo.votes.length
             totalVotes = voteop1 + voteop2
+        }
+
+        if(questions[id] === undefined) {
+            return (
+                <div>
+                    <h1>404</h1>
+                    <p>The page not found</p>
+                </div>
+            )
         }
 
         return (
@@ -47,13 +55,21 @@ class Question extends Component {
                             <Card.Text>
                                 {questions[id].optionOne.text}
                             </Card.Text>
+                            {questions[id].optionOne.votes.includes(users[currentUserId].id) && (
+                                <Badge pill bg="light" text="dark">voted</Badge>
+                            )}
                             <ProgressBar now={(voteop1/totalVotes)*100} label={`${(voteop1/totalVotes)*100}%`} />
-
+                            <p>{questions[id].optionOne.votes.length} of {questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length}</p>
+                            
                             <Card.Text>
                                 {questions[id].optionTwo.text}
                             </Card.Text>
+                            {questions[id].optionTwo.votes.includes(users[currentUserId].id) && (
+                                <Badge pill bg="light" text="dark">voted</Badge>
+                            )}
                             <ProgressBar now={(voteop2/totalVotes)*100} label={`${(voteop2/totalVotes)*100}%`} />
-
+                            <p>{questions[id].optionTwo.votes.length} of {questions[id].optionOne.votes.length + questions[id].optionTwo.votes.length}</p>
+                            
                             <Card.Text>
                                 Your answer : {users[currentUserId].answers[id]}
                             </Card.Text>
@@ -103,7 +119,7 @@ function mapStateToProps(state){
         questions: state.questions,
         currentUserId: state.login,
         users: state.users,
-        id
+        id,
     }
 }
 

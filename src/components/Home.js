@@ -13,12 +13,12 @@ class Home extends Component {
         return (
             <div>
                 <Header/>
-                <Tabs defaultActiveKey="answered" className="mb-3">
-                    <Tab eventKey="answered" title="Answered Questions">
-                        <AnsweredQuestions ques={Object.values(questions).filter(q => users[currentUserId].answers[q.id])}/>
-                    </Tab>
+                <Tabs defaultActiveKey="unanswered" className="mb-3">
                     <Tab eventKey="unanswered" title="Unanswered Questions">
                         <UnansweredQuestions ques={Object.values(questions).filter(q => !users[currentUserId].answers[q.id])}/>
+                    </Tab>
+                    <Tab eventKey="answered" title="Answered Questions">
+                        <AnsweredQuestions ques={Object.values(questions).filter(q => users[currentUserId].answers[q.id])}/>
                     </Tab>
                 </Tabs>
             </div>
