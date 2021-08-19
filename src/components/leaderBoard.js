@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import Header from './Header'
-import {Card, Button} from 'react-bootstrap'
+import {Card} from 'react-bootstrap'
 import {connect} from 'react-redux'
 
 class leaderBoard extends Component {
     render() {
 
-        const {users, sortedUsers} = this.props
-        console.log(this.props.sortedUsers)
+        const { sortedUsers} = this.props
 
         return (
             <div>
